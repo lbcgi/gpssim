@@ -1,0 +1,6 @@
+function neu = ecef2neu(xyz, t)
+
+    neu = [t(1,1) * xyz(1) + t(1,2) * xyz(2) + t(1,3) * xyz(3);...
+    t(2,1) * xyz(1) + t(2,2) * xyz(2) + t(2,3) * xyz(3);...
+    t(3,1) * xyz(1) + t(3,2) * xyz(2) + t(3,3) * xyz(3)];
+
