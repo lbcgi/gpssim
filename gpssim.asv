@@ -389,9 +389,9 @@ for iumd = 1:numd - 1
 
         % Update channel allocation  
         if ~staticLocationMode  
-            [~, chan, allocatedSat] = allocateChannel(chan, eph(ieph+1,:), ionoutc, grx, xyz(iumd + 1,:), allocatedSat, sysConfig);  
+            [~, chan, allocatedSat] = allocateChannel(chan, eph(ieph,:), ionoutc, grx, xyz(iumd + 1,:), allocatedSat, sysConfig);  
         else  
-            [~, chan, allocatedSat] = allocateChannel(chan, eph(ieph+1,:), ionoutc, grx, xyz(1,:), allocatedSat, sysConfig);  
+            [~, chan, allocatedSat] = allocateChannel(chan, eph(ieph,:), ionoutc, grx, xyz(1,:), allocatedSat, sysConfig);  
         end  
 
         % Show details about simulated channels  
@@ -410,9 +410,9 @@ for iumd = 1:numd - 1
     % Update receiver time  
     grx = incGpsTime(grx, 1/times, sysConfig);  
     % Update time counter
-%     if mod(igrx, 0.01*times) == 0 % Every 0.01 seconds  
-    fprintf('\rTime into run = %4.3f\n', subGpsTime(grx, g0, sysConfig));
-%     end
+    if mod(igrx, 0.01*times) == 0 % Every 0.01 seconds  
+        fprintf('\rTime into run = %4.3f\n', subGpsTime(grx, g0, sysConfig));
+    end
 end
 
 consume = toc;

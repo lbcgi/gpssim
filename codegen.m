@@ -16,23 +16,25 @@ function ca = codegen(prn, sysConfig)
         r2(i) = -1;  
     end  
   
-    for i = 1:sysConfig.CA_SEQ_LEN  
-        g1(i) = r1(9);  
-        g2(i) = r2(9);  
-        c1 = r1(2) * r1(9);  
-        c2 = r2(1) * r2(2) * r2(5) * r2(7) * r2(8) * r2(9);  
+    for i = 0:sysConfig.CA_SEQ_LEN - 1  
+        g1(i + 1) = r1(10);  
+        g2(i + 1) = r2(10);  
+        c1 = r1(3) * r1(10);  
+        c2 = r2(2) * r2(3) * r2(6) * r2(8) * r2(9) * r2(10);  
   
-        for j = 10:-1:2  
-            r1(j) = r1(j-1);  
-            r2(j) = r2(j-1);  
+        for j = 9:-1:1 
+            r1(j + 1) = r1(j);  
+            r2(j + 1) = r2(j);  
         end  
         r1(1) = c1;  
         r2(1) = c2;  
     end  
    
     ca = NaN(1, sysConfig.CA_SEQ_LEN);
-    for i = 1:sysConfig.CA_SEQ_LEN  
-        j = mod(i + delay(prn) - 1, sysConfig.CA_SEQ_LEN);  
-        ca(i) = (1 - g1(i) * g2(j+1)) / 2;  
+    j = sysConfig.CA_SEQ_LEN - delay(prn);
+    for i = 0:sysConfig.CA_SEQ_LEN - 1  
+        jt = rem(j, sysConfig.CA_SEQ_LEN);  
+        ca(i + 1) = (1 - g1(i + 1) * g2(jt+1)) / 2; 
+        j = j + 1;
     end  
 end

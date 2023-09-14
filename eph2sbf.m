@@ -68,10 +68,10 @@ function sbf = eph2sbf(eph, ionoutc, sysConfig)
                                                 bitshift(bitand(svhlth,hex2dec('3F')),8));
     sbf(1,4:6) = 0;  
     sbf(1,7) = bitshift(bitand(tgd,hex2dec('FF')), 6);  
-%     sbf(1,8) = bitshift(bitor(bitshift(bitand(iodc,hex2dec('FF')),22), ...
-%                                                                     bitshift(bitand(toc,hex2dec('FFFF')),6)), 0);  
-%     sbf(1,9) = bitshift(bitor(bitshift(bitand(af2,hex2dec('FF')),22), ...
-%                                                                     bitshift(bitand(af1,hex2dec('FFFF')),6)), 0);  
+    sbf(1,8) = bitshift(bitor(bitshift(bitand(iodc,hex2dec('FF')),22), ...
+                                                                    bitshift(bitand(toc,hex2dec('FFFF')),6)), 0);  
+    sbf(1,9) = bitshift(bitor(bitshift(bitand(af2,hex2dec('FF')),22), ...
+                                                                    bitshift(bitand(af1,hex2dec('FFFF')),6)), 0);  
     sbf(1,10) = bitshift(bitand(af0,hex2dec('3FFFFF')), 8);  
 
     % Subframe 2  

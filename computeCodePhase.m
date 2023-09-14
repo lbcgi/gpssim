@@ -26,7 +26,7 @@ function chan = computeCodePhase(chan, rho1, dt, sysConfig)
     % icode is used for counting, every 20ms is a bit  
     chan.icode = ims; % 1 code = 1 ms  
 
-    chan.codeCA = chan.ca(fix(chan.code_phase)+1)*2-1;  
+    chan.codeCA = chan.ca(int32(chan.code_phase)+1)*2-1;  
     chan.dataBit = bitand(bitshift(chan.dwrd(chan.iword+1), -(29-chan.ibit)), 1)*2-1;  
 
     % Save current pseudorange  

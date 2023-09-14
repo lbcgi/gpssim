@@ -22,11 +22,14 @@ function [nsat, chan, allocatedSat] = allocateChannel(chan, eph, ionoutc, grx, x
                         chan(i+1).ca = codegen(chan(i+1).prn, sysConfig);  
   
                         % Generate subframe  
+%                         tic
+%                         chan(i+1).sbf = uint32(eph2sbf_dll(eph(sv+1), ionoutc));
+%                         t1 = toc
+%                         tic
                         chan(i+1).sbf = eph2sbf(eph(sv+1), ionoutc, sysConfig);  
-  
-                        % Generate navigation message  
-                        [~, chan(i+1)] = generateNavMsg(grx, chan(i+1), 1, sysConfig);  
-  
+%                         t2 = toc
+                        % Generate navigation message                         
+                        [~, chan(i+1)] = generateNavMsg(grx, chan(i+1), 1, sysConfig);                        
                         % Initialize pseudorange  
                         rho = computeRange(eph(sv+1), ionoutc, grx, xyz, sysConfig);  
                         chan(i+1).rho0 = rho;  
@@ -39,7 +42,7 @@ function [nsat, chan, allocatedSat] = allocateChannel(chan, eph, ionoutc, grx, x
   
                         phase_ini = (2.0*r_ref - r_xyz)/sysConfig.LAMBDA_L1; 
                         phase_ini = phase_ini - floor(phase_ini);
-                        chan(i+1).carr_phase = uint32(512.0 * 65536.0 * phase_ini);                      
+                        chan(i+1).carr_phase = int32(512.0 * 65536.0 * phase_ini);                      
                         % Done.  
                         break;  
                     end  
