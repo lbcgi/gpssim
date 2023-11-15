@@ -1,5 +1,4 @@
 function g1 = incGpsTime(g0, dt, sysConfig)
-
     g1.week = g0.week;
     g1.sec = g0.sec + dt;
     
@@ -15,3 +14,4 @@ function g1 = incGpsTime(g0, dt, sysConfig)
 		g1.sec = g1.sec + sysConfig.SECONDS_IN_WEEK;
 		g1.week = g1.week - 1;
     end
+    

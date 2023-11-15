@@ -20,15 +20,16 @@ function ret = checkSatVisibility(eph, g, xyz, elvMask, azel, sysConfig)
     tmat = ltcmat(llh);
 
     % 计算卫星位置和速度
-    [pos, vel, clk] = satpos(eph, g, sysConfig);
+    [pos, ~, ~] = satpos(eph, g, sysConfig);
     los = pos - xyz;
     neu = ecef2neu(los, tmat);
     azel = neu2azel(neu);
 
     % 检查可见度
-    if azel(1) * sysConfig.R2D > elvMask
+    if azel(2) * sysConfig.R2D > elvMask
         ret = 1; % 可见
-    else
-        ret = 0; % 不可见
+        return;
     end
+        ret = 0; % 不可见
+    
 end

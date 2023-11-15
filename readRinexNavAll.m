@@ -11,8 +11,8 @@ function [ieph,  eph, ionoutc] = readRinexNavAll(fname, ionoutc, sysConfig)
     end
     
     % 定义常量  
-    EPHEM_ARRAY_SIZE = sysConfig.EPHEM_ARRAY_SIZE; % 根据需要更改  
-    MAX_SAT = sysConfig.MAX_SAT; % 根据需要更改  
+%     EPHEM_ARRAY_SIZE = sysConfig.EPHEM_ARRAY_SIZE; % 根据需要更改  
+%     MAX_SAT = sysConfig.MAX_SAT; % 根据需要更改  
   
     % 预分配内存并随机初始化eph数组  
 %     eph = repmat(struct(''), EPHEM_ARRAY_SIZE, MAX_SAT);  

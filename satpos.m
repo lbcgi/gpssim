@@ -13,7 +13,7 @@ function [pos, vel, clk] = satpos(eph, g, sysConfig)
     ekold = ek + 1.0;
 
     OneMinusecosE = 0; % Suppress the uninitialized warning.
-    while (abs(ek - ekold) > 1.0E-14)
+    while (abs(ek - ekold) > 1.0E-15)
 
         ekold = ek;
         OneMinusecosE = 1.0 - eph.ecc*cos(ekold);

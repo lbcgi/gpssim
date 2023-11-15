@@ -5,9 +5,9 @@ function rho = computeRange(eph, ionoutc, g, xyz, sysConfig)
 % g: gpstime_t (input)  
 % xyz: double array (input)  
   
-    pos = zeros(1, 3);  
-    vel = zeros(1, 3);  
-    clk = zeros(1, 2);  
+%     pos = zeros(1, 3);  
+%     vel = zeros(1, 3);  
+%     clk = zeros(1, 2);  
    
     % SV position at time of the pseudorange observation.  
     [pos, vel, clk] = satpos(eph, g, sysConfig);  

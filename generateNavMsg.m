@@ -12,7 +12,7 @@ function [result, chan] = generateNavMsg(g, chan, init, sysConfig)
   
     % Initialize subframe 5  
     if init == 1  
-        prevwrd = 0;  
+        prevwrd = uint32(0);  
         for iwrd = 0:sysConfig.N_DWRD_SBF-1  
             sbfwrd = chan.sbf(5, iwrd + 1);  
             % Add TOW-count message into HOW  
@@ -20,9 +20,9 @@ function [result, chan] = generateNavMsg(g, chan, init, sysConfig)
                 sbfwrd = bitor(sbfwrd, bitshift(bitand(tow,hex2dec('1FFFF')), 13));  
             end  
             % Compute checksum  
-            sbfwrd = bitor(sbfwrd, bitand(bitshift(uint32(prevwrd), 30) , hex2dec('C0000000'))); % 2 LSBs of the previous transmitted word  
+            sbfwrd = bitor(sbfwrd, bitand(bitshift(prevwrd, 30) , hex2dec('C0000000'))); % 2 LSBs of the previous transmitted word  
             nib = (iwrd == 1 | iwrd == 9); % Non-information bearing bits for word 2 and 10  
-            chan.dwrd(iwrd + 1) = uint32(computeChecksum(sbfwrd, nib));  
+            chan.dwrd(iwrd + 1) = computeChecksum(sbfwrd, nib);  
             prevwrd = chan.dwrd(iwrd + 1);  
         end  
     else
@@ -40,7 +40,7 @@ function [result, chan] = generateNavMsg(g, chan, init, sysConfig)
     for isbf = 0:sysConfig.N_SBF-1  
         tow = tow + 1;  
         for iwrd = 0:sysConfig.N_DWRD_SBF-1  
-            sbfwrd = chan.sbf(isbf + 1, iwrd + 1);  
+            sbfwrd = uint32(chan.sbf(isbf + 1, iwrd + 1));  
             % Add transmission week number to Subframe 1  
             if ((isbf==0)&&(iwrd==2))  
                 sbfwrd = bitor(sbfwrd, bitshift(bitand(wn,hex2dec('3FF')), 20));  
